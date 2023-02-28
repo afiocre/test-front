@@ -5,6 +5,6 @@
 ## Launch
 - Lancer la commande: `make up`
 
-## Api doc
+## Front
 - Url: `https://localhost`
 
