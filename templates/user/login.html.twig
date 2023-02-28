@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+    <h1 class="mb-2">Login</h1>
+    <a href="{{ path('post_list') }}">Back</a>
+    <div class="pt-4">
+        {% if is_granted('ROLE_USER') %}
+            Hello <strong>{{ app.user.firstName }}</strong><br>
+            <a href="{{ path('user_logout') }}">Logout</a>
+        {% else %}
+            <a class="btn btn-icon btn-outline-secondary btn-google btn-sm w-auto px-3 mx-1" href="{{ path('user_login_google') }}">
+                Google
+            </a>
+        {% endif %}
+    </div>
+{% endblock %}

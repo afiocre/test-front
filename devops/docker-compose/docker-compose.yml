@@ -1,0 +1,27 @@
+version: '3.9'
+
+networks:
+  test-frontend:
+
+services:
+  nginx:
+    container_name: "test-front-nginx"
+    build:
+      context: ./nginx
+    volumes:
+      - ../..:/var/www
+      - ./nginx/certs:/etc/nginx/certs
+    depends_on:
+      - php
+    ports:
+      - "443:443"
+    networks:
+      - test-frontend
+  php:
+    build:
+      context: ./php
+    container_name: 'test-front-php'
+    volumes:
+      - ../..:/var/www
+    networks:
+      - test-frontend

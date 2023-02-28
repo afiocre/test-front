@@ -1,0 +1,31 @@
+framework:
+    secret: '%env(APP_SECRET)%'
+    http_method_override: false
+    session:
+        handler_id: null
+        cookie_secure: auto
+        cookie_samesite: lax
+        storage_factory_id: session.storage.factory.native
+    form:
+        csrf_protection:
+            enabled: false
+    php_errors:
+        log: true
+    http_client:
+        scoped_clients:
+            backend.client:
+                base_uri: '%env(BACKEND_API_URL)%'
+when@dev:
+    framework:
+        http_client:
+            scoped_clients:
+                backend.client:
+                    base_uri: 'https://host.docker.internal:4443'
+                    verify_peer: false
+                    verify_host: false
+
+when@test:
+    framework:
+        test: true
+        session:
+            storage_factory_id: session.storage.factory.mock_file
